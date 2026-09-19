@@ -1,3 +1,6 @@
+mod arrays;
+use arrays::*;
+
 fn main() {
-    println!("Hello, world!");
+    // Test your solutions
 }
