@@ -1,14 +1,13 @@
 // Basic DSA Questions For Arrays
 
-// Question-1: Given an array, move all 0s to the end of it while maintaining the relative order of the non-zero elements
-
 use std::{
     collections::{BTreeSet, HashSet},
     vec,
 };
 
-// Un-optimized solution with high space and time complexity
-// Un-optimized solution has a space complexity of O(n)
+// Question-1: Given an array, move all 0s to the end of it while maintaining the relative order of the non-zero elements
+
+// Un-optimized solution with high space and time complexity, space complexity of O(n)
 pub fn move_zeros_to_end_unoptimized(nums: &mut [i32]) -> Vec<i32> {
     let mut zero_end_array: Vec<i32> = Vec::new();
     let mut zero_array: Vec<i32> = Vec::new();
@@ -26,9 +25,8 @@ pub fn move_zeros_to_end_unoptimized(nums: &mut [i32]) -> Vec<i32> {
     return zero_end_array;
 }
 
-// Optimized Solution without copying or making new vectors
-// Optimized Solution has the space complezity of O(1) -> constant
-pub fn _move_zeros_to_end_optimized(nums: &mut [i32]) -> &mut [i32] {
+// Optimized Solution without copying or making new vectors, space complezity of O(1) -> constant
+pub fn move_zeros_to_end_optimized(nums: &mut [i32]) -> &mut [i32] {
     let mut writer_index = 0;
 
     // Step 1: Move all non-zero elements to the front
@@ -146,20 +144,9 @@ pub fn count_no_zeros_ones(arr: Vec<i32>) -> Vec<i32> {
     return ans;
 }
 
-pub fn first_unsorted_element(arr: Vec<i32>) -> Vec<i32> {
-    for (i, v) in arr.iter().enumerate() {
-        if arr[i] > arr[i + 1] {
-            let ans = vec![*v as i32, i as i32];
-            return ans;
-        }
-    }
-    return vec![];
-}
-
 // ------------------------------------------------------------------------------------//
 
 // Question-7: Find maximum value element in an array
-
 pub fn get_maximum(arr: Vec<i32>) -> i32 {
     let mut max_value = arr[0];
 
@@ -206,12 +193,9 @@ pub fn get_minimum(arr: Vec<i32>) -> i32 {
 
 */
 
+// ------------------------------------------------------------------------------------//
+
 // Question-9: Swap Alternate Elements in an Array
-
-// let arr = vec![1,2,3,4];
-
-// swapped arr = [2,1,4,3]
-
 pub fn swap_alternate(arr: &mut [i32]) {
     let mut i = 0;
     let length = arr.len();
@@ -235,8 +219,9 @@ pub fn swap_alternate(arr: &mut [i32]) {
     }
 }
 
-// Question-10: Print Array union element
+// ------------------------------------------------------------------------------------//
 
+// Question-10: Print Array union element
 pub fn print_array_union(arr: Vec<i32>, brr: Vec<i32>) -> Vec<i32> {
     let mut union: HashSet<i32> = HashSet::new();
 
@@ -252,8 +237,9 @@ pub fn print_array_union(arr: Vec<i32>, brr: Vec<i32>) -> Vec<i32> {
     return ans;
 }
 
-// Question-11: Print Array intersection element
+// ------------------------------------------------------------------------------------//
 
+// Question-11: Print Array intersection element
 pub fn print_array_intersection(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
     let mut intersection: BTreeSet<i32> = BTreeSet::new();
 
@@ -279,6 +265,9 @@ pub fn print_array_intersection(a: Vec<i32>, b: Vec<i32>) -> Vec<i32> {
     println!("{:?}", ans);
 */
 
+// ------------------------------------------------------------------------------------//
+
+// Question-12: print alternate extream elements in an array
 pub fn print_alternate_extream_elements(arr: Vec<i32>) {
     let l = arr.len();
     let mut counter = 0;
@@ -291,3 +280,18 @@ pub fn print_alternate_extream_elements(arr: Vec<i32>) {
         counter += 1;
     }
 }
+
+// ------------------------------------------------------------------------------------//
+
+// Question-13: Return the first unsorted element in an array
+pub fn first_unsorted_element(arr: Vec<i32>) -> Vec<i32> {
+    for (i, v) in arr.iter().enumerate() {
+        if arr[i] > arr[i + 1] {
+            let ans = vec![*v as i32, i as i32];
+            return ans;
+        }
+    }
+    return vec![];
+}
+
+// ------------------------------------------------------------------------------------//
