@@ -295,3 +295,141 @@ pub fn first_unsorted_element(arr: Vec<i32>) -> Vec<i32> {
 }
 
 // ------------------------------------------------------------------------------------//
+
+// Question-14: Move an element to next space in an array
+// Optimise solution
+
+// ------------------------------------------------------------------------------------//
+
+// Un-optimised solution: time complexity O((m+n)log(m+n));
+pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
+    let mut set: Vec<i32> = Vec::new();
+
+    for a in nums1 {
+        set.push(a);
+    }
+
+    for b in nums2 {
+        set.push(b);
+    }
+
+    set.sort();
+
+    let median: f64;
+    let set_len = set.len();
+    let mid_len = set_len / 2;
+
+    if set_len % 2 == 0 {
+        median = (set[mid_len - 1] + (set[mid_len])) as f64 / 2.0;
+    } else {
+        median = set[set_len / 2] as f64;
+    };
+
+    return median;
+}
+
+// Optimised solution: time complexity O(log(min(m,n)))
+pub fn find_median_sorted_arrays_optimised(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
+    let (a, b) = if nums1.len() <= nums2.len() {
+        (&nums1, &nums2)
+    } else {
+        (&nums2, &nums1)
+    };
+    let (m, n) = (a.len(), b.len());
+    let half = (m + n + 1) / 2;
+
+    let (mut i_lo, mut i_hi) = (0usize, m);
+    while i_lo <= i_hi {
+        let i = i_lo + (i_hi - i_lo) / 2;
+        let j = half - i;
+        let left1 = if i == 0 { i32::MIN } else { a[i - 1] };
+        let right1 = if i == m { i32::MAX } else { a[i] };
+        let left2 = if j == 0 { i32::MIN } else { b[j - 1] };
+        let right2 = if j == n { i32::MAX } else { b[j] };
+
+        if left1 > right2 {
+            i_hi = i - 1;
+        } else if left2 > right1 {
+            i_lo = i + 1;
+        } else {
+            let max_left = left1.max(left2) as f64;
+            return if (m + n) % 2 == 1 {
+                max_left
+            } else {
+                let min_right = right1.min(right2) as f64;
+                (max_left + min_right) / 2.0
+            };
+        }
+    }
+    unreachable!("a valid partition always exists");
+}
+
+// Question: Given an integer X, return true if its a palindrome or flase otherwise.
+
+pub fn is_palindrome(x: i32) -> bool {
+    let num = x.to_string();
+
+    if x < 0 {
+        let reveresed_num: String = num[0..].chars().rev().collect();
+        let parsed_num: i32 = reveresed_num.parse().unwrap_or(0);
+        -parsed_num;
+        if parsed_num.eq(&x) {
+            return true;
+        }
+    }
+
+    let reverse_num: String = num[0..].chars().rev().collect();
+    let parsed_num: i32 = reverse_num.parse().unwrap_or(0);
+    println!("{}", parsed_num);
+
+    if parsed_num.eq(&x) {
+        return true;
+    }
+
+    return false;
+}
+
+// Question-20: Merge 2 sorted arrays
+
+pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
+    // for (i,m) in nums1.iter().enumerate(){
+
+    //     if nums1[i] == 0{
+    //          nums1.remove(i);
+    //     }
+    // }
+    // for (i,n) in nums2.iter().enumerate(){
+
+    //     if nums2[i] == 0{
+    //          nums2.remove(i);
+    //     }
+    // }
+
+    // for val in nums2{
+    //     nums1.push(*val);
+    // }
+
+    // nums1.sort();
+
+    nums1.truncate(m as usize);
+
+    nums2.truncate(n as usize);
+
+    nums1.append(nums2);
+
+    nums1.sort();
+}
+
+pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
+   let mut sq: Vec<i32> = Vec::new();
+
+
+   for v in nums{
+        let s = v * v;
+        sq.push(s);
+   } 
+
+   sq.sort();
+
+   return sq;
+}
